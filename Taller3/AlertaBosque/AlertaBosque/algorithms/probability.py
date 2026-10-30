@@ -1,6 +1,6 @@
 """Punto 1. Distribuciones discretas y decisiones de respuesta."""
 import math
-
+#raise ValueError("")
 
 def normalize(weights: dict) -> dict:
     """Retorna un diccionario nuevo cuyas probabilidades suman uno.
@@ -13,8 +13,26 @@ def normalize(weights: dict) -> dict:
     - Rechace pesos negativos, no finitos, diccionarios vacíos y suma cero.
     """
     # TODO: Add your code here
-    raise NotImplementedError("Complete este bloque TODO")
+    if len(weights) == 0:
+        raise ValueError("El diccionario está vacio")
+    for y in weights.values():
+        if y == None:
+            raise ValueError("Los valores tienen que ser diferenetes a None")
+        if y < 0:
+            raise ValueError("Los valores deberian ser mayores o iguales a 0")
+        if not math.isfinite(y):
+            raise ValueError("Los valores tienen que ser finitos")
+    salida = {}
+    total = 0
+    for x in weights.values():
+        total += x
+    if total == 0:
+        raise ValueError("La suma de los valores es igual a 0")
+    for x in weights:
+        salida[x] = weights[x]/total
+    return salida
     # FIN DEL BLOQUE DEL ESTUDIANTE
+ 
 
 
 def expected_utility(distribution: dict, utilities: dict) -> float:
